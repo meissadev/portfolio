@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  portfolio:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: meissa-portfolio:latest
+    container_name: meissa-portfolio
+    ports:
+      - "8880:80"
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
