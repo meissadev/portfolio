@@ -1,0 +1,106 @@
+@import 'tailwindcss';
+
+/* Le mode sombre suit l'attribut data-theme posé sur <html> (voir index.html) */
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+
+/* ---------- Tokens de couleur : même identité en clair et en sombre ---------- */
+:root {
+  --c-bg: #f6f8fb;
+  --c-surface: #ffffff;
+  --c-surface-2: #eef2f8;
+  --c-ink: #0f1b2d;
+  --c-muted: #475569;
+  --c-primary: #1d3a63; /* bleu marine du CV */
+  --c-accent: #2f5d9a; /* bleu du CV */
+  --c-line: #d9e1ec;
+  --c-on-primary: #ffffff;
+  --c-ok: #1f7a4d;
+  --c-todo-bg: #fff6e0;
+  --c-todo-ink: #7a4b00;
+  --c-todo-line: #c98a1e;
+  color-scheme: light;
+}
+
+[data-theme='dark'] {
+  --c-bg: #0b1422;
+  --c-surface: #111d30;
+  --c-surface-2: #16253c;
+  --c-ink: #e6ecf5;
+  --c-muted: #a3b1c6;
+  --c-primary: #9dbbe6; /* bleu marine éclairci pour garder le contraste AA */
+  --c-accent: #7aa5e0;
+  --c-line: #26374f;
+  --c-on-primary: #0b1422;
+  --c-ok: #5fcf98;
+  --c-todo-bg: #2b2210;
+  --c-todo-ink: #f3c56b;
+  --c-todo-line: #a87a26;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-bg: var(--c-bg);
+  --color-surface: var(--c-surface);
+  --color-surface-2: var(--c-surface-2);
+  --color-ink: var(--c-ink);
+  --color-muted: var(--c-muted);
+  --color-primary: var(--c-primary);
+  --color-accent: var(--c-accent);
+  --color-line: var(--c-line);
+  --color-on-primary: var(--c-on-primary);
+  --color-ok: var(--c-ok);
+  --color-todo-bg: var(--c-todo-bg);
+  --color-todo-ink: var(--c-todo-ink);
+  --color-todo-line: var(--c-todo-line);
+
+  --font-sans: 'IBM Plex Sans', ui-sans-serif, system-ui, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'Cascadia Mono', Consolas, monospace;
+}
+
+@layer base {
+  html {
+    scroll-padding-top: 5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+  body {
+    background-color: var(--c-bg);
+    color: var(--c-ink);
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+  :focus-visible {
+    outline: 2px solid var(--c-accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+  ::selection {
+    background: color-mix(in srgb, var(--c-accent) 25%, transparent);
+  }
+}
+
+@layer components {
+  .container-page {
+    width: 100%;
+    max-width: 72rem;
+    margin-inline: auto;
+    padding-inline: 1rem;
+  }
+  @media (min-width: 640px) {
+    .container-page {
+      padding-inline: 1.5rem;
+    }
+  }
+  .label-mono {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+}

@@ -1,0 +1,6 @@
+dist
+node_modules
+public/og
+package-lock.json
+.vite-react-ssg-temp
+.claude

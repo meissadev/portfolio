@@ -1,0 +1,57 @@
+import type { SkillGroup } from './types'
+
+/** Compétences par domaine, chacune reliée aux projets qui la démontrent. */
+export const skillGroups: SkillGroup[] = [
+  {
+    id: 'soc',
+    title: { fr: 'SOC et détection' },
+    icon: 'radar',
+    items: ['Wazuh', 'MISP', 'VirusTotal', 'Shuffle (SOAR)', 'Analyse de logs', 'Détection'],
+    proofs: [
+      { project: 'soc-open-source' },
+      { section: 'distinction', label: { fr: 'Cyber Competition Challenge 2026' } },
+    ],
+  },
+  {
+    id: 'incidents',
+    title: { fr: 'Traitement des incidents' },
+    icon: 'siren',
+    items: ['SOP ransomware', 'SOP DDoS', 'Gestion de crise', 'Rapport pour la direction'],
+    proofs: [{ section: 'distinction', label: { fr: 'Cyber Competition Challenge 2026' } }],
+  },
+  {
+    id: 'secu-reseau',
+    title: { fr: 'Sécurité réseau' },
+    icon: 'shield',
+    items: ['FortiGate', 'Sophos', 'IPS', 'Filtrage web', 'WAF', 'Active Directory', 'Zero Trust'],
+    proofs: [
+      { project: 'ngfw-sophos-fortigate' },
+      { section: 'experience', label: { fr: 'Stage AIBD' } },
+      { project: 'memoire-zero-trust-post-quantique' },
+    ],
+  },
+  {
+    id: 'routage',
+    title: { fr: 'Routage et commutation' },
+    icon: 'router',
+    items: ['Cisco IOS', 'iBGP / eBGP', 'VRF-Lite', 'MPLS', 'QoS', 'GNS3', 'Wireshark'],
+    proofs: [{ project: 'ingenierie-trafic-operateur' }, { project: 'qos-multisites' }],
+  },
+  {
+    id: 'systemes',
+    title: { fr: 'Systèmes et virtualisation' },
+    icon: 'server',
+    items: ['VMware ESXi', 'Kubernetes', 'TrueNAS', 'LVM'],
+    proofs: [{ project: 'infra-kubernetes-esxi' }],
+  },
+  {
+    id: 'aws',
+    title: { fr: 'Cloud AWS' },
+    icon: 'cloud',
+    items: ['AWS Lambda', 'API Gateway', 'Amazon Cognito', 'IAM', 'Cloud Practitioner'],
+    proofs: [
+      { project: 'api-rest-aws' },
+      { section: 'formation', label: { fr: 'Certification AWS' } },
+    ],
+  },
+]

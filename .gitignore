@@ -1,0 +1,8 @@
+node_modules
+dist
+.vite-react-ssg-temp
+# Images Open Graph régénérées à chaque build
+public/og
+.env.local
+.vercel
+*.log
