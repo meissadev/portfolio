@@ -1,5 +1,6 @@
 import type { Project } from '../types'
 import apiRestAws from './api-rest-aws'
+import hauteDisponibiliteLan from './haute-disponibilite-lan'
 import infraKubernetesEsxi from './infra-kubernetes-esxi'
 import ingenierieTraficOperateur from './ingenierie-trafic-operateur'
 import memoireZeroTrust from './memoire-zero-trust-post-quantique'
@@ -20,6 +21,7 @@ export const projects: Project[] = [
   infraKubernetesEsxi,
   memoireZeroTrust,
   apiRestAws,
+  hauteDisponibiliteLan,
 ]
 
 export const getProject = (slug: string) => projects.find((p) => p.slug === slug)
