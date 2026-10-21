@@ -20,6 +20,7 @@ export const skillGroups: SkillGroup[] = [
     proofs: [
       { project: 'soc-open-source' },
       { section: 'distinction', label: { fr: 'Cyber Competition Challenge 2026' } },
+      { section: 'formation', label: { fr: 'Badge LetsDefend' } },
     ],
   },
   {

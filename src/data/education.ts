@@ -39,4 +39,10 @@ export const certifications: Certification[] = [
     date: { fr: '2026' },
     verifyUrl: 'https://www.credly.com/badges/a364b0de-b831-4bc8-b025-fcf075bbafee/public_url',
   },
+  {
+    name: 'SOC Fundamentals — badge SOC Member',
+    issuer: 'LetsDefend',
+    date: { fr: 'Octobre 2025' },
+    verifyUrl: 'https://app.letsdefend.io/my-rewards/detail/ced40f31e0a74870b0b74c0dad1aa423',
+  },
 ]

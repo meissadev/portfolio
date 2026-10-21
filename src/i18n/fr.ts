@@ -72,7 +72,7 @@ export const fr = {
     title: 'Formation et certification',
     degrees: 'Parcours',
     certification: 'Certifications et badges',
-    verify: 'Vérifier sur Credly',
+    verify: 'Vérifier le badge',
   },
   contact: {
     eyebrow: 'Contact',
