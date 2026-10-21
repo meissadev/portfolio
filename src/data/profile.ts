@@ -4,24 +4,31 @@ export const profile = {
   name: 'Meissa Babou',
   initials: 'MB',
   footerTag: 'réseau + sécurité',
+  /** Photo de profil (dans /public) et ses dimensions réelles */
+  photo: {
+    src: '/images/profil/meissa-babou.jpg',
+    width: 1024,
+    height: 1280,
+    alt: { fr: 'Portrait de Meissa Babou' } as Localized,
+  },
   headline: {
-    fr: 'Ingénieur sécurité réseau et analyste SOC junior : du routage opérateur à la détection des menaces.',
+    fr: 'Analyste SOC junior et sécurité réseau : du routage opérateur à la détection des menaces.',
   } as Localized,
-  /** Postes visés, affichés en étiquettes sur l'accueil */
+  /** Postes visés, affichés sur l'accueil */
   roles: [
-    { fr: 'Analyste SOC', en: 'SOC Analyst' },
-    { fr: 'Ingénieur sécurité réseau' },
+    { fr: 'Analyste SOC junior', en: 'Junior SOC Analyst' },
+    { fr: 'Sécurité réseau' },
   ] as Localized[],
   status: {
     fr: 'Étudiant en Master 2 Réseaux et Télécoms à l’Université Iba Der Thiam de Thiès (Sénégal).',
   } as Localized,
   seeking: {
-    fr: 'Je recherche un premier poste en cybersécurité à Dakar.',
+    fr: 'Je recherche un premier poste en réseau et cybersécurité à Dakar.',
   } as Localized,
   /** Fiche « show profil » de l'accueil : paires clé / valeur */
   profileSheet: [
-    { key: 'poste', value: { fr: 'Analyste SOC · Ingénieur sécurité réseau' } },
-    { key: 'domaine', value: { fr: 'Réseau + Sécurité' } },
+    { key: 'poste', value: { fr: 'Analyste SOC junior · Sécurité réseau' } },
+    { key: 'domaine', value: { fr: 'Réseau + Cybersécurité' } },
     { key: 'formation', value: { fr: 'M2 Réseaux et Télécoms (UIDT)' } },
     { key: 'cert', value: { fr: 'AWS Certified Cloud Practitioner' } },
     { key: 'cible', value: { fr: 'Dakar, Sénégal' } },
@@ -31,7 +38,7 @@ export const profile = {
     {
       icon: 'trophy',
       title: { fr: 'Lauréat Cyber Competition Challenge 2026' },
-      sub: { fr: '1re place sur 64 équipes africaines' },
+      sub: { fr: '1re place · équipe SecurityForAll' },
       href: '#distinction',
     },
     {
@@ -49,16 +56,11 @@ export const profile = {
   ] as { icon: 'trophy' | 'badge' | 'briefcase'; title: Localized; sub: Localized; href: string }[],
   email: 'meissababou66@gmail.com',
   /** null = lien pas encore fourni (un marqueur [À COMPLÉTER] s'affiche) */
-  linkedin: null as string | null,
+  linkedin: 'https://www.linkedin.com/in/meissa-babou-029588248/' as string | null,
   github: 'https://github.com/meissadev' as string | null,
-  /** Fichiers à déposer dans public/cv/ */
+  /** Fichiers déposés dans public/cv/ */
   cvs: [
-    { id: 'soc', label: { fr: 'CV Analyste SOC' }, file: '/cv/meissa-babou-cv-soc.pdf' },
-    {
-      id: 'reseau',
-      label: { fr: 'CV Sécurité réseau' },
-      file: '/cv/meissa-babou-cv-securite-reseau.pdf',
-    },
+    { id: 'cv', label: { fr: 'CV Meissa Babou' }, file: '/cv/meissa-babou-cv.pdf' },
   ] as CvFile[],
   interests: [
     {

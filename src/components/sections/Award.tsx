@@ -1,10 +1,9 @@
-import { ExternalLink, Trophy } from 'lucide-react'
+import { Trophy } from 'lucide-react'
 import { award } from '../../data/award'
 import { useI18n } from '../../i18n'
 import Reveal from '../ui/Reveal'
 import Section from '../ui/Section'
 import { Text } from '../ui/Text'
-import { buttonSecondary } from '../ui/buttons'
 
 export default function Award() {
   const { t, l } = useI18n()
@@ -31,16 +30,6 @@ export default function Award() {
               <span className="label-mono mr-2 text-muted">{t.award.role}</span>
               <Text>{l(award.role)}</Text>
             </p>
-            <a
-              href={award.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`${buttonSecondary} mt-6`}
-            >
-              {t.award.visit}
-              <ExternalLink size={15} aria-hidden="true" />
-              <span className="sr-only">(nouvel onglet)</span>
-            </a>
           </div>
           <div>
             <h4 className="label-mono text-accent">{t.award.round}</h4>
@@ -56,6 +45,28 @@ export default function Award() {
             </ol>
           </div>
         </article>
+      </Reveal>
+      <Reveal delay={0.08}>
+        <ul aria-label={t.award.photos} className="mt-5 grid gap-5 sm:grid-cols-[1.6fr_1fr]">
+          {award.photos.map((p, i) => (
+            <li key={p.src}>
+              <figure className="overflow-hidden rounded-xl border border-line bg-surface">
+                <img
+                  src={p.src}
+                  width={p.width}
+                  height={p.height}
+                  alt={l(p.alt)}
+                  loading="lazy"
+                  decoding="async"
+                  className={`h-72 w-full sm:h-96 ${i === 0 ? 'object-cover' : 'object-contain'}`}
+                />
+                <figcaption className="border-t border-line px-4 py-3 text-sm text-muted">
+                  {l(p.caption)}
+                </figcaption>
+              </figure>
+            </li>
+          ))}
+        </ul>
       </Reveal>
     </Section>
   )

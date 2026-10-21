@@ -1,4 +1,4 @@
-import { todo, type Project } from '../types'
+import { todo, type Project } from '../../types'
 
 const project: Project = {
   slug: 'ngfw-sophos-fortigate',

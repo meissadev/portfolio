@@ -4,7 +4,7 @@
  * satori convertit le texte en tracés : le rendu ne dépend d'aucune police installée.
  */
 import { Resvg } from '@resvg/resvg-js'
-import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'
+import { mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 import satori from 'satori'
 import { award } from '../src/data/award'
@@ -209,12 +209,14 @@ async function render(file: string, node: Node) {
   writeFileSync(join('public', 'og', file), png)
 }
 
+// Repart d'un dossier vide : les aperçus des projets retirés disparaissent
+rmSync(join('public', 'og'), { recursive: true, force: true })
 mkdirSync(join('public', 'og'), { recursive: true })
 
 await render(
   'default.png',
   card({
-    eyebrow: '// ANALYSTE SOC · INGÉNIEUR SÉCURITÉ RÉSEAU',
+    eyebrow: '// ANALYSTE SOC JUNIOR · SÉCURITÉ RÉSEAU',
     title: 'Du routage opérateur à la détection des menaces',
     tags: ['Réseau', 'Sécurité', `${award.competition} · 1re place`],
     footer: 'Portfolio · Master 2 Réseaux et Télécoms',

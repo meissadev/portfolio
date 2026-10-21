@@ -17,11 +17,11 @@ export default function Home() {
     '@context': 'https://schema.org',
     '@type': 'Person',
     name: profile.name,
-    jobTitle: 'Analyste SOC / Ingénieur sécurité réseau',
+    jobTitle: 'Analyste SOC junior · Sécurité réseau',
     url: SITE_URL,
     email: `mailto:${profile.email}`,
     alumniOf: { '@type': 'CollegeOrUniversity', name: 'Université Iba Der Thiam de Thiès' },
-    award: `${award.competition} — 1re place sur 64 équipes`,
+    award: `${award.competition} — 1re place`,
     sameAs: [profile.linkedin, profile.github].filter(Boolean),
   }
   return (

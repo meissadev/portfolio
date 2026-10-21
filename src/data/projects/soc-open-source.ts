@@ -12,7 +12,7 @@ const project: Project = {
   categories: ['soc', 'securite'],
   status: 'done',
   context: {
-    fr: 'Manche SOC (DAY 3) du Cyber Competition Challenge 2026, challenge remporté par l’équipe SecurityForAll (1re place sur 64 équipes). Scénario : le SOC 24/7 d’une banque fictive. La chaîne prévue en production (Splunk ES et SOAR, CrowdStrike, ServiceNow) a été reproduite outil par outil en open source, car les versions gratuites des produits commerciaux ne permettent pas de montrer une chaîne complète.',
+    fr: 'Manche SOC (DAY 3) du Cyber Competition Challenge 2026, challenge remporté par l’équipe SecurityForAll (1re place). Scénario : le SOC 24/7 d’une banque fictive. La chaîne prévue en production (Splunk ES et SOAR, CrowdStrike, ServiceNow) a été reproduite outil par outil en open source, car les versions gratuites des produits commerciaux ne permettent pas de montrer une chaîne complète.',
   },
   objective: {
     fr: 'Démontrer devant le jury une chaîne SOC complète et mesurée : collecter, détecter, enrichir, répondre et tracer, sur des attaques simulées internes au laboratoire (scan Web, fichier malveillant, rançongiciel, déni de service).',
@@ -123,11 +123,11 @@ const project: Project = {
   },
   screenshots: [
     {
-      src: `${IMG}/chaine_soc.png`,
+      src: `${IMG}/architecture-laboratoire.png`,
       alt: {
-        fr: 'Chaîne d’intégration : sources DC01 et SRV-WEB vers Wazuh, puis Shuffle qui interroge MISP, puis DFIR-IRIS et les analystes, avec l’équivalent en production (Splunk ES, Splunk SOAR, ServiceNow).',
+        fr: 'Architecture du laboratoire de démonstration sur AWS (Londres) : VPC découpé en segments SOC, banque et attaque ; SOC-01 avec Wazuh et VirusTotal, SOC-02 avec Shuffle, MISP et DFIR-IRIS ; DC01 et SRV-WEB surveillés par les agents Wazuh, Sysmon, YARA et Suricata ; accès par Session Manager.',
       },
-      caption: { fr: 'Chaîne d’intégration de la démonstration et son équivalent en production.' },
+      caption: { fr: 'Architecture du laboratoire de démonstration.' },
       wide: true,
     },
     {

@@ -47,7 +47,7 @@ export default function Hero() {
             {profile.cvs.map((cv) => (
               <a key={cv.id} href={cv.file} download className={buttonSecondary}>
                 <Download size={16} aria-hidden="true" />
-                {l(cv.label)}
+                {t.hero.ctaCv}
               </a>
             ))}
           </div>
@@ -56,8 +56,17 @@ export default function Hero() {
         {/* Fiche profil façon sortie d'équipement */}
         <aside
           aria-label="Résumé du profil"
-          className="order-3 rounded-xl border border-line bg-surface/95 shadow-sm backdrop-blur lg:order-none"
+          className="order-3 overflow-hidden rounded-xl border border-line bg-surface/95 shadow-sm backdrop-blur lg:order-none"
         >
+          <img
+            src={profile.photo.src}
+            width={profile.photo.width}
+            height={profile.photo.height}
+            alt={l(profile.photo.alt)}
+            fetchPriority="high"
+            decoding="async"
+            className="h-72 w-full border-b border-line object-cover object-[50%_18%] sm:h-80"
+          />
           <div className="flex items-center justify-between border-b border-line px-4 py-2.5 font-mono text-xs text-muted">
             <span>
               <span aria-hidden="true">MB-01 › </span>

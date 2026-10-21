@@ -1,4 +1,4 @@
-import { todo, type Certification, type TimelineEntry } from './types'
+import type { Certification, TimelineEntry } from './types'
 
 export const education: TimelineEntry[] = [
   {
@@ -22,7 +22,7 @@ export const education: TimelineEntry[] = [
     id: 'licence',
     period: { fr: '2023' },
     title: { fr: 'Licence Réseaux et Télécoms' },
-    org: { fr: todo('établissement') },
+    org: { fr: 'Université Iba Der Thiam de Thiès (UIDT)' },
   },
 ]
 
@@ -31,7 +31,12 @@ export const certifications: Certification[] = [
     name: 'AWS Certified Cloud Practitioner',
     issuer: 'Amazon Web Services',
     date: { fr: 'Juillet 2026' },
-    /** null = lien de vérification pas encore fourni */
-    verifyUrl: null,
+    verifyUrl: 'https://www.credly.com/badges/d4e0caf7-aa01-493d-a36c-90c4e7a956ec/public_url',
+  },
+  {
+    name: 'AWS re/Start Graduate',
+    issuer: 'Amazon Web Services · Sonatel Academy',
+    date: { fr: '2026' },
+    verifyUrl: 'https://www.credly.com/badges/a364b0de-b831-4bc8-b025-fcf075bbafee/public_url',
   },
 ]

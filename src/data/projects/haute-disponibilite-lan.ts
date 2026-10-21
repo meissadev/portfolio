@@ -2,7 +2,7 @@ import type { Project } from '../types'
 
 const project: Project = {
   slug: 'haute-disponibilite-lan',
-  code: 'PRJ-08',
+  code: 'PRJ-03',
   title: { fr: 'Haute disponibilité LAN : HSRP, EtherChannel et Rapid PVST+' },
   summary: {
     fr: 'Réseau campus redondant sous Cisco Packet Tracer : deux routeurs en HSRP, quatre commutateurs reliés par six EtherChannel LACP, Rapid PVST+ et routage inter-VLAN par sous-interfaces 802.1Q.',

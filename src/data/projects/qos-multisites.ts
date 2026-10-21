@@ -4,7 +4,7 @@ const IMG = '/images/projets/qos-multisites'
 
 const project: Project = {
   slug: 'qos-multisites',
-  code: 'PRJ-03',
+  code: 'PRJ-02',
   title: { fr: 'Réseau inter-LAN sécurisé et optimisé par la QoS' },
   summary: {
     fr: 'Interconnexion d’un siège et d’un site de secours à travers un nuage opérateur RIPv2/OSPF émulé sous GNS3 : VPN IPsec, pare-feu FortiGate, téléphonie IP Cisco CME, puis QoS (classification, marquage, lissage) mesurée avec iperf3 et Wireshark.',

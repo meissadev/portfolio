@@ -32,13 +32,15 @@ src/data/            ← TOUT le contenu du site (c'est ici que tu modifies le t
   profile.ts         nom, accroche, e-mail, LinkedIn, GitHub, CV, preuves de l'accueil
   award.ts           Cyber Competition Challenge 2026
   projects/          un fichier par projet + index.ts (ordre d'affichage)
+    brouillons/      projets rédigés mais pas encore publiés
   experience.ts      stage et engagement associatif
   education.ts       diplômes et certification
   skills.ts          compétences par domaine et projets qui les prouvent
   types.ts           structure attendue de chaque donnée
 src/i18n/            libellés de l'interface (fr.ts, en.ts)
 src/components/      composants (ne pas toucher pour modifier le contenu)
-public/cv/           les deux CV en PDF
+public/cv/           le CV en PDF
+public/files/        documents téléchargeables (rapport QoS, lab Packet Tracer)
 public/images/       captures d'écran des projets
 scripts/             images Open Graph, sitemap, robots.txt
 .env                 SITE_URL : l'adresse publique du site
@@ -123,8 +125,7 @@ Le texte `alt` décrit ce que montre l'image : il est lu par les lecteurs d'écr
 
 ## Changer les CV, LinkedIn ou GitHub
 
-- CV : remplacer les fichiers dans `public/cv/` en gardant les mêmes noms
-  (`meissa-babou-cv-soc.pdf`, `meissa-babou-cv-securite-reseau.pdf`).
+- CV : remplacer `public/cv/meissa-babou-cv.pdf` en gardant le même nom.
 - LinkedIn / GitHub : renseigner `linkedin` et `github` dans `src/data/profile.ts`.
 
 ## Déployer sur Vercel

@@ -16,7 +16,7 @@ export const fr = {
   theme: { toggle: 'Basculer entre thème clair et sombre' },
   hero: {
     ctaProjects: 'Voir les projets',
-    ctaCv: 'Télécharger un CV',
+    ctaCv: 'Télécharger mon CV',
     profileTitle: 'show profil',
     proofsLabel: 'Preuves clés',
   },
@@ -24,7 +24,7 @@ export const fr = {
     eyebrow: 'Distinction',
     round: 'Livrables de la manche',
     role: 'Mon rôle',
-    visit: 'Voir le site de l’équipe',
+    photos: 'Photos de la remise du trophée',
   },
   projects: {
     eyebrow: 'Projets',
@@ -71,16 +71,16 @@ export const fr = {
     eyebrow: 'Formation',
     title: 'Formation et certification',
     degrees: 'Parcours',
-    certification: 'Certification',
-    verify: 'Vérifier la certification',
+    certification: 'Certifications et badges',
+    verify: 'Vérifier sur Credly',
   },
   contact: {
     eyebrow: 'Contact',
     title: 'Discutons de votre poste',
     intro:
-      'Je recherche un premier poste en cybersécurité à Dakar : analyste SOC ou ingénieur sécurité réseau.',
+      'Je recherche un premier poste en réseau et cybersécurité à Dakar : analyste SOC ou sécurité réseau.',
     email: 'Écrire un e-mail',
-    cvs: 'Télécharger mon CV',
+    cvs: 'Mon CV',
   },
   footer: { top: 'Retour en haut' },
   notFound: {
@@ -90,9 +90,9 @@ export const fr = {
   },
   seo: {
     siteName: 'Meissa Babou — Portfolio',
-    homeTitle: 'Meissa Babou — Analyste SOC et ingénieur sécurité réseau',
+    homeTitle: 'Meissa Babou — Analyste SOC junior · Sécurité réseau',
     homeDescription:
-      'Ingénieur sécurité réseau et analyste SOC junior, lauréat du Cyber Competition Challenge 2026 (1re place sur 64 équipes). Projets SOC, BGP/MPLS, NGFW, QoS et cloud AWS.',
+      'Analyste SOC junior et sécurité réseau, lauréat du Cyber Competition Challenge 2026 (1re place). Projets : SOC open source sur AWS, réseau inter-LAN avec VPN et QoS, haute disponibilité LAN.',
   },
 }
 
