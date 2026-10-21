@@ -50,7 +50,7 @@ export const profile = {
   email: 'meissababou66@gmail.com',
   /** null = lien pas encore fourni (un marqueur [À COMPLÉTER] s'affiche) */
   linkedin: null as string | null,
-  github: null as string | null,
+  github: 'https://github.com/meissadev' as string | null,
   /** Fichiers à déposer dans public/cv/ */
   cvs: [
     { id: 'soc', label: { fr: 'CV Analyste SOC' }, file: '/cv/meissa-babou-cv-soc.pdf' },

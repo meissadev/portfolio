@@ -1,4 +1,4 @@
-import { todo, type Localized } from './types'
+import type { Localized } from './types'
 
 export const award = {
   competition: 'Cyber Competition Challenge 2026',
@@ -13,6 +13,8 @@ export const award = {
     { fr: 'Plan de gestion de crise' },
     { fr: 'Rapport pour la direction' },
   ] as Localized[],
-  role: { fr: todo('ton rôle dans l’équipe et ta contribution personnelle') } as Localized,
+  role: {
+    fr: 'Directeur technique (CTO) de l’équipe. Laboratoire SOC de la démonstration : voir le projet PRJ-01.',
+  } as Localized,
   url: 'https://securityforall.vercel.app/',
 }
