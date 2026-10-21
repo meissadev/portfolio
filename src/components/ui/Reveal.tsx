@@ -1,7 +1,13 @@
 import { m } from 'framer-motion'
-import type { ReactNode } from 'react'
+import { useSyncExternalStore, type ReactNode } from 'react'
 
-/** Apparition douce au défilement (désactivée si « réduire les animations »). */
+const noopSubscribe = () => () => {}
+
+/**
+ * Apparition douce au défilement (désactivée si « réduire les animations »).
+ * Le HTML pré-rendu reste visible : l'animation ne s'active qu'après le chargement
+ * de l'application, pour que le contenu ne disparaisse jamais si JavaScript échoue.
+ */
 export default function Reveal({
   children,
   delay = 0,
@@ -11,6 +17,15 @@ export default function Reveal({
   delay?: number
   className?: string
 }) {
+  // false au pré-rendu et pendant l'hydratation, true ensuite
+  const ready = useSyncExternalStore(
+    noopSubscribe,
+    () => true,
+    () => false,
+  )
+
+  if (!ready) return <div className={className}>{children}</div>
+
   return (
     <m.div
       className={className}
