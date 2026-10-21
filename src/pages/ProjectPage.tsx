@@ -1,4 +1,4 @@
-import { ArrowLeft, ArrowRight, ExternalLink } from 'lucide-react'
+import { ArrowLeft, ArrowRight, Download, ExternalLink } from 'lucide-react'
 import type { ReactNode } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import Seo from '../components/layout/Seo'
@@ -129,7 +129,7 @@ export default function ProjectPage() {
               {project.screenshots.map((s) => (
                 <figure
                   key={s.src}
-                  className="overflow-hidden rounded-xl border border-line bg-surface"
+                  className={`overflow-hidden rounded-xl border border-line bg-surface ${s.wide ? 'sm:col-span-2' : ''}`}
                 >
                   <img
                     src={s.src}
@@ -152,20 +152,29 @@ export default function ProjectPage() {
         </Block>
 
         <Block title={t.project.links}>
-          {project.github ? (
-            <a
-              href={project.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={buttonSecondary}
-            >
-              {t.project.github}
-              <ExternalLink size={15} aria-hidden="true" />
-              <span className="sr-only">(nouvel onglet)</span>
-            </a>
-          ) : (
-            <Placeholder>[À COMPLÉTER : lien GitHub, si le code est publiable]</Placeholder>
-          )}
+          <div className="flex flex-wrap items-center gap-3">
+            {project.github && (
+              <a
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={buttonSecondary}
+              >
+                {t.project.github}
+                <ExternalLink size={15} aria-hidden="true" />
+                <span className="sr-only">(nouvel onglet)</span>
+              </a>
+            )}
+            {project.resources?.map((r) => (
+              <a key={r.href} href={r.href} download className={buttonSecondary}>
+                <Download size={15} aria-hidden="true" />
+                {l(r.label)}
+              </a>
+            ))}
+            {!project.github && !project.resources?.length && (
+              <Placeholder>[À COMPLÉTER : lien GitHub, si le code est publiable]</Placeholder>
+            )}
+          </div>
         </Block>
 
         <nav

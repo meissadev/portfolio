@@ -1,4 +1,4 @@
-import { todo, type Project } from '../types'
+import type { Project } from '../types'
 
 const project: Project = {
   slug: 'haute-disponibilite-lan',
@@ -28,25 +28,42 @@ const project: Project = {
       fr: 'Routage inter-VLAN sur R1 et R2 par sous-interfaces dot1Q (VLAN 10, 20 et 99), avec le VLAN 99 comme VLAN natif.',
     },
     {
-      fr: 'HSRP sur les sous-interfaces : R1 actif pour les VLAN 10 et 99, R2 actif pour le VLAN 20 (priorité 250). Les PC utilisent l’adresse virtuelle .1 comme passerelle.',
+      fr: 'HSRP avec préemption : R1 actif pour les VLAN 10 et 99, R2 actif pour le VLAN 20 (priorité 250). Les PC utilisent l’adresse virtuelle .1 comme passerelle.',
     },
     {
-      fr: 'Trunks natifs VLAN 99 sur F0/19–24 et G0/1–2, et six EtherChannel LACP (Po1 à Po6) en maillage complet entre S1, S2, S3 et S4.',
+      fr: 'Six EtherChannel LACP (Po1 à Po6) en maillage complet entre S1, S2, S3 et S4, sur des trunks au VLAN natif 99.',
     },
     {
-      fr: 'Rapid PVST+ sur tous les commutateurs : S1 racine du VLAN 10 (4096), S2 racine du VLAN 20 (4096), chacun aligné sur le routeur HSRP actif du même VLAN.',
+      fr: 'Rapid PVST+ : S1 racine du VLAN 10 et S2 racine du VLAN 20, chacun aligné sur le routeur HSRP actif du même VLAN.',
     },
     {
-      fr: todo(
-        'résultats de validation : show standby brief, show etherchannel summary, show spanning-tree, pings PC → web, test de bascule en coupant R1',
-      ),
+      fr: 'Validé : show standby brief montre R1 actif pour le VLAN 10 et R2 en veille, et l’inverse pour le VLAN 20.',
+    },
+    {
+      fr: 'Validé : sur S1, Po1, Po3 et Po5 sont en service (SU) en LACP, tous les ports agrégés (P).',
+    },
+    {
+      fr: 'Validé : S1 est racine du VLAN 10 (priorité 4106 = 4096 + VLAN 10) et S2 du VLAN 20 (4116), en mode rstp.',
+    },
+    {
+      fr: 'Validé : PC10A joint le serveur web (TTL 126) et PC20B dans l’autre VLAN (TTL 127), 0 % de perte.',
+    },
+    {
+      fr: 'Test de bascule : avec un ping continu de PC10A vers le serveur web, la coupure de R1 coûte 2 requêtes perdues, puis R2 devient actif pour le VLAN 10 et le trafic reprend.',
     },
   ],
   learnings: [
     {
-      fr: todo(
-        '2 ou 3 apprentissages clés (ex. aligner racine STP et routeur HSRP actif, rôle du VLAN natif, comportement lors d’une bascule)',
-      ),
+      fr: 'Aligner la racine Spanning Tree et le routeur HSRP actif de chaque VLAN évite au trafic un détour par le lien entre commutateurs de distribution, tout en répartissant la charge entre R1 et R2.',
+    },
+    {
+      fr: 'La priorité de pont affichée inclut le sys-id-ext : 4096 configuré devient 4106 pour le VLAN 10. Il faut le savoir pour lire show spanning-tree.',
+    },
+    {
+      fr: 'HSRP rend la panne d’un routeur quasi invisible pour les postes : la passerelle virtuelle ne change pas, seules quelques secondes de convergence sont perdues.',
+    },
+    {
+      fr: 'Point relevé dans les sorties : sur le VLAN 99 (natif), R1 et R2 se déclarent tous deux actifs, avec un standby « unknown ». Leurs messages HSRP ne se voient pas sur ce VLAN ; la piste à vérifier est la cohérence du VLAN natif entre sous-interfaces et trunks.',
     },
   ],
   topology: {
@@ -97,12 +114,85 @@ const project: Project = {
         fr: 'Topologie Packet Tracer : serveur web relié à l’ISP, routeurs R1 et R2 reliés en série à l’ISP, commutateurs S1 à S4 reliés par six canaux EtherChannel LACP, et quatre PC.',
       },
       caption: { fr: 'Topologie Packet Tracer de l’énoncé du TP.' },
+      wide: true,
+    },
+    {
+      src: '/images/projets/haute-disponibilite-lan/hsrp-r1.png',
+      alt: {
+        fr: 'Sortie show standby brief sur R1 : groupe 10 actif priorité 250, groupe 20 en veille priorité 100, groupe 99 actif priorité 250.',
+      },
+      caption: { fr: 'R1 · show standby brief : actif pour les VLAN 10 et 99.' },
+      wide: true,
+    },
+    {
+      src: '/images/projets/haute-disponibilite-lan/hsrp-r2.png',
+      alt: {
+        fr: 'Sortie show standby brief sur R2 : groupe 10 en veille, groupe 20 actif priorité 250, groupe 99 actif.',
+      },
+      caption: { fr: 'R2 · show standby brief : actif pour le VLAN 20.' },
+      wide: true,
+    },
+    {
+      src: '/images/projets/haute-disponibilite-lan/etherchannel-s1.png',
+      alt: {
+        fr: 'Sortie show etherchannel summary sur S1 : Po1, Po3 et Po5 en état SU, protocole LACP, ports Fa0/19 à Fa0/24 agrégés.',
+      },
+      caption: { fr: 'S1 · show etherchannel summary : trois canaux LACP en service.' },
+    },
+    {
+      src: '/images/projets/haute-disponibilite-lan/stp-s1-vlan10.png',
+      alt: {
+        fr: 'Sortie show spanning-tree vlan 10 sur S1 : protocole rstp, priorité 4106, « This bridge is the root », tous les ports désignés en forwarding.',
+      },
+      caption: { fr: 'S1 · show spanning-tree vlan 10 : racine du VLAN 10.' },
+    },
+    {
+      src: '/images/projets/haute-disponibilite-lan/stp-s2-vlan20.png',
+      alt: {
+        fr: 'Sortie show spanning-tree vlan 20 sur S2 : protocole rstp, priorité 4116, « This bridge is the root », tous les ports désignés en forwarding.',
+      },
+      caption: { fr: 'S2 · show spanning-tree vlan 20 : racine du VLAN 20.' },
+    },
+    {
+      src: '/images/projets/haute-disponibilite-lan/ping-pc10a-web.png',
+      alt: {
+        fr: 'Invite de commandes de PC10A : ping vers 64.104.13.130, 4 réponses sur 4, 0 % de perte.',
+      },
+      caption: { fr: 'PC10A → serveur web : 4/4 réponses.' },
+    },
+    {
+      src: '/images/projets/haute-disponibilite-lan/ping-pc10a-pc20b.png',
+      alt: {
+        fr: 'Invite de commandes de PC10A : ping vers 192.168.20.102 (PC20B), 4 réponses sur 4, 0 % de perte.',
+      },
+      caption: { fr: 'PC10A → PC20B (VLAN 20) : routage inter-VLAN fonctionnel.' },
+    },
+    {
+      src: '/images/projets/haute-disponibilite-lan/bascule-ping.png',
+      alt: {
+        fr: 'Ping continu de PC10A vers le serveur web : deux « Request timed out » pendant la coupure de R1, puis les réponses reprennent.',
+      },
+      caption: { fr: 'Bascule : 2 requêtes perdues pendant la coupure de R1.' },
+    },
+    {
+      src: '/images/projets/haute-disponibilite-lan/bascule-hsrp-r2.png',
+      alt: {
+        fr: 'Sortie show standby brief sur R2 après la coupure de R1 : R2 actif pour les groupes 10, 20 et 99, standby inconnu.',
+      },
+      caption: { fr: 'R2 après la bascule : actif pour tous les VLAN.' },
+      wide: true,
     },
   ],
   screenshotsHint: {
-    fr: 'show standby brief sur R1 et R2, show etherchannel summary, show spanning-tree vlan 10, ping réussi vers le serveur web',
+    fr: 'sorties de vérification HSRP, EtherChannel, Spanning Tree et tests de connectivité',
   },
   github: null,
+  resources: [
+    {
+      label: { fr: 'Fichier Packet Tracer (.pkt)' },
+      href: '/files/tp-haute-disponibilite-lan.pkt',
+    },
+  ],
 }
 
 export default project

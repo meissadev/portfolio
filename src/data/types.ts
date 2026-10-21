@@ -85,6 +85,14 @@ export interface Screenshot {
   src: string
   alt: Localized
   caption?: Localized
+  /** Occupe toute la largeur de la grille (schémas, sorties larges) */
+  wide?: boolean
+}
+
+export interface Resource {
+  label: Localized
+  /** Chemin dans /public, ex. "/files/mon-lab.pkt" */
+  href: string
 }
 
 export interface Project {
@@ -107,6 +115,8 @@ export interface Project {
   screenshotsHint: Localized
   /** URL du dépôt GitHub, ou null si non disponible */
   github: string | null
+  /** Fichiers téléchargeables (lab Packet Tracer, rapport…) */
+  resources?: Resource[]
 }
 
 /* ------------------------------ Parcours, profil ------------------------------ */
