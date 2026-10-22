@@ -20,7 +20,7 @@ export const education: TimelineEntry[] = [
   },
   {
     id: 'licence',
-    period: { fr: '2023' },
+    period: { fr: '2021 – 2024' },
     title: { fr: 'Licence Réseaux et Télécoms' },
     org: { fr: 'Université Iba Der Thiam de Thiès (UIDT)' },
   },

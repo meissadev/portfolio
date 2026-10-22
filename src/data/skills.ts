@@ -24,23 +24,6 @@ export const skillGroups: SkillGroup[] = [
     ],
   },
   {
-    id: 'incidents',
-    title: { fr: 'Traitement des incidents' },
-    icon: 'siren',
-    items: [
-      'SOP ransomware',
-      'SOP DDoS',
-      'Gestion de crise',
-      'Dossiers d’incident',
-      'Réponse automatique',
-      'Rapport pour la direction',
-    ],
-    proofs: [
-      { section: 'distinction', label: { fr: 'Cyber Competition Challenge 2026' } },
-      { project: 'soc-open-source' },
-    ],
-  },
-  {
     id: 'secu-reseau',
     title: { fr: 'Sécurité réseau' },
     icon: 'shield',
