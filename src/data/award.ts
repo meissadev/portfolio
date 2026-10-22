@@ -20,10 +20,10 @@ export const award = {
   photos: [
     {
       src: '/images/distinction/equipe-securityforall.jpg',
-      width: 1080,
-      height: 810,
-      alt: { fr: 'L’équipe SecurityForAll autour du Pr M. D. Sarr, qui tient le trophée.' },
-      caption: { fr: 'L’équipe SecurityForAll avec le Pr M. D. Sarr.' },
+      width: 1280,
+      height: 950,
+      alt: { fr: 'Membres de l’équipe SecurityForAll posant avec le trophée de la finale.' },
+      caption: { fr: 'L’équipe SecurityForAll avec son trophée.' },
     },
     {
       src: '/images/distinction/trophee.jpg',

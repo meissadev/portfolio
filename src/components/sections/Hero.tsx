@@ -65,7 +65,7 @@ export default function Hero() {
             alt={l(profile.photo.alt)}
             fetchPriority="high"
             decoding="async"
-            className="h-72 w-full border-b border-line object-cover object-[50%_18%] sm:h-80"
+            className="aspect-[5/4] w-full border-b border-line object-cover object-top"
           />
           <div className="flex items-center justify-between border-b border-line px-4 py-2.5 font-mono text-xs text-muted">
             <span>
