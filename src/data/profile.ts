@@ -54,7 +54,7 @@ export const profile = {
       href: '#experience',
     },
   ] as { icon: 'trophy' | 'badge' | 'briefcase'; title: Localized; sub: Localized; href: string }[],
-  email: 'meissababou66@gmail.com',
+  email: 'baboumeissa09@gmail.com',
   /** null = lien pas encore fourni (un marqueur [À COMPLÉTER] s'affiche) */
   linkedin: 'https://www.linkedin.com/in/meissa-babou-029588248/' as string | null,
   github: 'https://github.com/meissadev' as string | null,
