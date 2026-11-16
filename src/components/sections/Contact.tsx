@@ -46,7 +46,7 @@ export default function Contact() {
               {profile.cvs.map((cv) => (
                 <li key={cv.id}>
                   <a
-                    href={cv.file}
+                    href={l(cv.file)}
                     download
                     className="panel panel-hover flex items-center justify-between gap-3 bg-bg px-4 py-3"
                   >

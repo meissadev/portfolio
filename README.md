@@ -46,7 +46,7 @@ src/data/            ← TOUT le contenu du site (c'est ici que tu modifies le t
   types.ts           structure attendue de chaque donnée
 src/i18n/            libellés de l'interface (fr.ts, en.ts)
 src/components/      composants (ne pas toucher pour modifier le contenu)
-public/cv/           le CV en PDF
+public/cv/           le CV en PDF (FR et EN)
 public/files/        documents téléchargeables (rapport QoS, lab Packet Tracer)
 public/images/       captures d'écran des projets
 scripts/             images Open Graph, sitemap, robots.txt
@@ -132,7 +132,7 @@ Le texte `alt` décrit ce que montre l'image : il est lu par les lecteurs d'écr
 
 ## Changer les CV, LinkedIn ou GitHub
 
-- CV : remplacer `public/cv/meissa-babou-cv.pdf` en gardant le même nom.
+- CV : remplacer `public/cv/meissa-babou-cv.pdf` (français) et `public/cv/meissa-babou-cv-en.pdf` (anglais) en gardant les mêmes noms. Sources LaTeX : `CVLatex/CV_Meissa_Babou_Portfolio.tex` et `CV_Meissa_Babou_Portfolio_EN.tex`.
 - LinkedIn / GitHub : renseigner `linkedin` et `github` dans `src/data/profile.ts`.
 
 ## Déployer sur Vercel
@@ -181,7 +181,7 @@ rafraîchir son cache.
   rester dans la langue courante.
 - Chaque page déclare son équivalent dans l'autre langue (`hreflang`), et le sitemap liste les deux
   versions. Les images Open Graph anglaises sont dans `public/og/en/`.
-- Le CV et le rapport QoS n'existent qu'en français : leurs libellés anglais le précisent.
+- Le CV existe en français et en anglais ; le rapport QoS n'existe qu'en français (son libellé anglais le précise).
 
 ## Choix techniques
 

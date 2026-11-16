@@ -156,6 +156,6 @@ export interface SkillGroup {
 export interface CvFile {
   id: string
   label: Localized
-  /** Chemin dans /public */
-  file: string
+  /** Chemin dans /public, un fichier par langue si besoin */
+  file: Txt
 }

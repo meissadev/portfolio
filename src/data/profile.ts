@@ -86,8 +86,8 @@ export const profile = {
   cvs: [
     {
       id: 'cv',
-      label: { fr: 'CV Meissa Babou', en: 'Meissa Babou CV (in French)' },
-      file: '/cv/meissa-babou-cv.pdf',
+      label: { fr: 'CV Meissa Babou', en: 'Meissa Babou CV' },
+      file: { fr: '/cv/meissa-babou-cv.pdf', en: '/cv/meissa-babou-cv-en.pdf' },
     },
   ] as CvFile[],
   interests: [

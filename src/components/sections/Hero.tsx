@@ -52,7 +52,7 @@ export default function Hero() {
               <ArrowRight size={16} aria-hidden="true" />
             </a>
             {profile.cvs.map((cv) => (
-              <a key={cv.id} href={cv.file} download className={buttonSecondary}>
+              <a key={cv.id} href={l(cv.file)} download className={buttonSecondary}>
                 <Download size={16} aria-hidden="true" />
                 {t.hero.ctaCv}
               </a>
