@@ -12,14 +12,14 @@ export default function Education() {
     <Section id="formation" eyebrow={t.education.eyebrow} title={t.education.title} tinted>
       <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr]">
         <Reveal>
-          <h3 className="label-mono mb-6 text-accent">{t.education.degrees}</h3>
+          <h3 className="mb-6 font-mono text-sm text-accent">{t.education.degrees}</h3>
           <Timeline entries={education} />
         </Reveal>
         <Reveal delay={0.08}>
-          <h3 className="label-mono mb-6 text-accent">{t.education.certification}</h3>
+          <h3 className="mb-6 font-mono text-sm text-accent">{t.education.certification}</h3>
           <ul className="space-y-4">
             {certifications.map((c) => (
-              <li key={c.name} className="rounded-xl border border-line bg-surface p-5 shadow-sm">
+              <li key={l(c.name)} className="panel panel-hover p-5">
                 <div className="flex items-start gap-3">
                   <BadgeCheck
                     size={22}
@@ -27,9 +27,9 @@ export default function Education() {
                     className="mt-0.5 shrink-0 text-accent"
                   />
                   <div>
-                    <h4 className="font-semibold">{c.name}</h4>
+                    <h4 className="font-mono font-semibold">{l(c.name)}</h4>
                     <p className="text-sm text-muted">
-                      {c.issuer} · {l(c.date)}
+                      {l(c.issuer)} · {l(c.date)}
                     </p>
                     <p className="mt-3 text-sm">
                       {c.verifyUrl ? (
@@ -41,7 +41,7 @@ export default function Education() {
                         >
                           {t.education.verify}
                           <ExternalLink size={14} aria-hidden="true" />
-                          <span className="sr-only">(nouvel onglet)</span>
+                          <span className="sr-only">{t.newTab}</span>
                         </a>
                       ) : (
                         <Placeholder>

@@ -1,10 +1,9 @@
 import type { ReactNode } from 'react'
 
-/** Étiquette monospace façon « port d'équipement » (protocoles, outils). */
+/** Étiquette monospace (protocoles, outils), façon port d'équipement. */
 export default function Tag({ children }: { children: ReactNode }) {
   return (
-    <span className="inline-flex items-center gap-1.5 rounded border border-line bg-surface px-2 py-0.5 font-mono text-xs text-ink">
-      <span aria-hidden="true" className="size-1.5 rounded-[1px] bg-accent/70" />
+    <span className="inline-flex items-center rounded border border-accent/25 bg-accent/[0.06] px-2 py-0.5 font-mono text-xs text-ink">
       {children}
     </span>
   )

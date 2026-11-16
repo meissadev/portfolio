@@ -1,6 +1,7 @@
 /**
  * Génère les images d'aperçu Open Graph (PNG 1200×630) pour LinkedIn et les réseaux :
- * public/og/default.png (accueil) et public/og/<slug>.png (une par étude de cas).
+ * public/og/default.png (accueil) et public/og/<slug>.png (une par étude de cas),
+ * et les mêmes en anglais dans public/og/en/.
  * satori convertit le texte en tracés : le rendu ne dépend d'aucune police installée.
  */
 import { Resvg } from '@resvg/resvg-js'
@@ -14,9 +15,12 @@ import { categoryLabels } from '../src/data/types'
 
 const W = 1200
 const H = 630
-const NAVY = '#1D3A63'
-const BLUE = '#2F5D9A'
-const LIGHT = '#9DBBE6'
+// Palette « console SOC » du site (thème sombre)
+const BG = '#070B0F'
+const PANEL = '#0C1218'
+const GREEN = '#3DDC97'
+const CYAN = '#5CC8E6'
+const MUTED = '#8EA2B0'
 
 const font = (pkg: string, file: string) =>
   readFileSync(join('node_modules', '@fontsource', pkg, 'files', file))
@@ -93,7 +97,7 @@ const networkSvg = (() => {
   const circles = nodes
     .map(([x, y], i) => `<circle cx="${x}" cy="${y}" r="${[1, 5, 9].includes(i) ? 7 : 5}"/>`)
     .join('')
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="620" height="630" viewBox="0 0 620 630"><g stroke="${LIGHT}" stroke-opacity="0.35" stroke-width="1.5">${lines}</g><g fill="${NAVY}" stroke="${LIGHT}" stroke-opacity="0.8" stroke-width="2">${circles}</g></svg>`
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="620" height="630" viewBox="0 0 620 630"><g stroke="${GREEN}" stroke-opacity="0.25" stroke-width="1.5">${lines}</g><g fill="${BG}" stroke="${GREEN}" stroke-opacity="0.7" stroke-width="2">${circles}</g></svg>`
   return `data:image/svg+xml;base64,${Buffer.from(svg).toString('base64')}`
 })()
 
@@ -115,8 +119,9 @@ function card({
       height: H,
       display: 'flex',
       position: 'relative',
-      backgroundColor: NAVY,
-      backgroundImage: `linear-gradient(135deg, ${NAVY} 55%, ${BLUE} 140%)`,
+      backgroundColor: BG,
+      backgroundImage: `linear-gradient(135deg, ${BG} 55%, ${PANEL} 100%)`,
+      borderLeft: `10px solid ${GREEN}`,
       fontFamily: 'Plex',
       color: '#FFFFFF',
     },
@@ -145,13 +150,13 @@ function card({
                 justifyContent: 'center',
                 width: 56,
                 height: 56,
-                borderRadius: 10,
-                backgroundColor: '#FFFFFF',
-                color: NAVY,
+                borderRadius: 8,
+                border: `2px solid ${GREEN}`,
+                color: GREEN,
                 fontFamily: 'Plex Mono',
-                fontSize: 22,
+                fontSize: 24,
               },
-              profile.initials,
+              '>_',
             ),
             el('div', { display: 'flex', fontSize: 30, fontWeight: 600 }, profile.name),
           ]),
@@ -162,7 +167,7 @@ function card({
                 display: 'flex',
                 fontFamily: 'Plex Mono',
                 fontSize: 22,
-                color: LIGHT,
+                color: GREEN,
                 letterSpacing: 1,
               },
               eyebrow,
@@ -182,7 +187,8 @@ function card({
                     display: 'flex',
                     padding: '6px 14px',
                     borderRadius: 6,
-                    border: `1.5px solid ${LIGHT}`,
+                    border: `1.5px solid ${CYAN}`,
+                    backgroundColor: BG,
                     fontFamily: 'Plex Mono',
                     fontSize: 20,
                     color: '#E6ECF5',
@@ -194,7 +200,7 @@ function card({
           ]),
           el(
             'div',
-            { display: 'flex', fontFamily: 'Plex Mono', fontSize: 20, color: LIGHT },
+            { display: 'flex', fontFamily: 'Plex Mono', fontSize: 20, color: MUTED },
             footer,
           ),
         ],
@@ -213,26 +219,46 @@ async function render(file: string, node: Node) {
 rmSync(join('public', 'og'), { recursive: true, force: true })
 mkdirSync(join('public', 'og'), { recursive: true })
 
-await render(
-  'default.png',
-  card({
-    eyebrow: '// ANALYSTE SOC JUNIOR · SÉCURITÉ RÉSEAU',
+mkdirSync(join('public', 'og', 'en'), { recursive: true })
+
+const copy = {
+  fr: {
+    eyebrow: '$ whoami · ANALYSTE SOC JUNIOR · SÉCURITÉ RÉSEAU',
     title: 'Du routage opérateur à la détection des menaces',
     tags: ['Réseau', 'Sécurité', `${award.competition} · 1re place`],
     footer: 'Portfolio · Master 2 Réseaux et Télécoms',
-  }),
-)
-
-for (const p of projects) {
-  await render(
-    `${p.slug}.png`,
-    card({
-      eyebrow: `// ${p.code} · ${p.categories.map((c) => categoryLabels[c].fr.toUpperCase()).join(' / ')} · ÉTUDE DE CAS`,
-      title: p.title.fr,
-      tags: p.technologies.slice(0, 5),
-      footer: 'Portfolio · Meissa Babou',
-    }),
-  )
+    caseStudy: 'ÉTUDE DE CAS',
+  },
+  en: {
+    eyebrow: '$ whoami · JUNIOR SOC ANALYST · NETWORK SECURITY',
+    title: 'From carrier routing to threat detection',
+    tags: ['Network', 'Security', `${award.competition} · 1st place`],
+    footer: 'Portfolio · MSc Networks and Telecommunications',
+    caseStudy: 'CASE STUDY',
+  },
 }
 
-console.log(`OG : ${projects.length + 1} images générées dans public/og/`)
+for (const locale of ['fr', 'en'] as const) {
+  const c = copy[locale]
+  const dir = locale === 'fr' ? '' : 'en/'
+  await render(
+    `${dir}default.png`,
+    card({ eyebrow: c.eyebrow, title: c.title, tags: c.tags, footer: c.footer }),
+  )
+  for (const p of projects) {
+    const cats = p.categories.map((k) =>
+      (categoryLabels[k][locale] ?? categoryLabels[k].fr).toUpperCase(),
+    )
+    await render(
+      `${dir}${p.slug}.png`,
+      card({
+        eyebrow: `// ${p.code} · ${cats.join(' / ')} · ${c.caseStudy}`,
+        title: p.title[locale] ?? p.title.fr,
+        tags: p.technologies.slice(0, 5),
+        footer: 'Portfolio · Meissa Babou',
+      }),
+    )
+  }
+}
+
+console.log(`OG : ${2 * (projects.length + 1)} images générées dans public/og/ (fr et en)`)

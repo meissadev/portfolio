@@ -31,9 +31,9 @@ export default function Projects() {
                 type="button"
                 aria-pressed={active}
                 onClick={() => setFilter(f)}
-                className={`rounded-full border px-3.5 py-1.5 font-mono text-xs font-medium transition-colors ${
+                className={`rounded-md border px-3 py-1.5 font-mono text-xs font-medium transition-colors ${
                   active
-                    ? 'border-primary bg-primary text-on-primary'
+                    ? 'border-accent bg-accent/15 text-accent'
                     : 'border-line bg-surface text-muted hover:border-accent hover:text-accent'
                 }`}
               >

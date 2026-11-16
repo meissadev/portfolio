@@ -1,11 +1,116 @@
 import type { UiStrings } from './fr'
 
-/**
- * Version anglaise — à traduire le jour où elle est activée.
- * Tant qu'elle reprend le français, le site reste cohérent.
- * Pour l'activer : traduire ces libellés, renseigner les champs `en` dans src/data,
- * puis ajouter les routes /en (voir README).
- */
-import { fr } from './fr'
-
-export const en: UiStrings = { ...fr }
+/** English interface labels (the content itself is translated in src/data). */
+export const en: UiStrings = {
+  skipLink: 'Skip to content',
+  newTab: '(opens in a new tab)',
+  lang: {
+    label: 'Site language',
+    names: { fr: 'Français', en: 'English' },
+  },
+  nav: {
+    label: 'Main navigation',
+    home: 'Home',
+    award: 'Award',
+    projects: 'Projects',
+    experience: 'Experience',
+    skills: 'Skills',
+    education: 'Education',
+    contact: 'Contact',
+    openMenu: 'Open menu',
+    closeMenu: 'Close menu',
+  },
+  theme: { toggle: 'Switch between light and dark theme' },
+  hero: {
+    ctaProjects: 'View projects',
+    ctaCv: 'Download my CV',
+    profileTitle: 'profile.yml',
+    profileLabel: 'Profile summary',
+    proofsLabel: 'Key evidence',
+    available: 'open to work',
+    domainsLabel: 'Fields',
+    domains: ['Network', 'Security', 'SOC'],
+  },
+  award: {
+    eyebrow: 'Award',
+    round: 'Round deliverables',
+    role: 'My role',
+    photos: 'Photos from the award ceremony',
+    team: 'Team',
+  },
+  projects: {
+    eyebrow: 'Projects',
+    title: 'Technical projects',
+    intro:
+      'Each project is presented as an equipment sheet. Open the case study for the context, the diagram and the results.',
+    filterLabel: 'Filter projects by field',
+    all: 'All',
+    count: (n: number) => `${n} project${n > 1 ? 's' : ''} shown`,
+    caseStudy: 'Case study',
+    objective: 'Objective',
+    status: { done: 'Completed', ongoing: 'In progress' },
+  },
+  project: {
+    back: 'All projects',
+    context: 'Context',
+    objective: 'Objective',
+    technologies: 'Technologies',
+    diagram: 'Diagram',
+    achievements: 'What I built',
+    learnings: 'What I learned',
+    screenshots: 'Screenshots',
+    links: 'Links',
+    github: 'Code on GitHub',
+    prev: 'Previous project',
+    next: 'Next project',
+    diagramText: 'Text description of the diagram',
+    diagramScroll: 'Scroll horizontally to see the whole diagram.',
+    logicalLink: '(logical link)',
+    others: 'Other projects',
+    todoScreens: 'screenshots',
+  },
+  experience: {
+    eyebrow: 'Experience',
+    title: 'Experience and involvement',
+    work: 'Work experience',
+    engagement: 'Involvement',
+  },
+  skills: {
+    eyebrow: 'Skills',
+    title: 'Skills',
+    intro: 'Grouped by field, each with the project that demonstrates it.',
+    proofs: 'Shown in',
+    interests: 'Interests',
+  },
+  education: {
+    eyebrow: 'Education',
+    title: 'Education and certifications',
+    degrees: 'Path',
+    certification: 'Certifications and badges',
+    verify: 'Verify the badge',
+  },
+  contact: {
+    eyebrow: 'Contact',
+    title: 'Let’s talk about your role',
+    intro:
+      'I am looking for a first position in networking and cybersecurity in Dakar: SOC analyst or network security.',
+    email: 'Send an email',
+    cvs: 'My CV',
+  },
+  footer: { top: 'Back to top', status: 'status: online' },
+  notFound: {
+    code: 'Error 404',
+    title: 'Page not found',
+    text: 'This page does not exist or has been moved.',
+    home: 'Back to home',
+  },
+  seo: {
+    siteName: 'Meissa Babou — Portfolio',
+    jobTitle: 'Junior SOC Analyst · Network Security',
+    award: '1st place',
+    ogLocale: 'en_US',
+    homeTitle: 'Meissa Babou — Junior SOC Analyst · Network Security',
+    homeDescription:
+      'Junior SOC analyst and network security, winner of the Cyber Competition Challenge 2026 (1st place). Projects: open-source SOC on AWS, inter-LAN network with VPN and QoS, LAN high availability.',
+  },
+}

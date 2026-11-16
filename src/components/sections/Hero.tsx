@@ -13,24 +13,31 @@ export default function Hero() {
       <NetworkBackdrop />
       <div className="container-page relative grid gap-10 pt-14 pb-16 sm:pt-20 lg:grid-cols-[1.3fr_1fr] lg:items-center lg:gap-14 lg:pb-24">
         <div>
-          <p className="label-mono text-accent">
-            <span aria-hidden="true">// </span>
-            {l(profile.roles[0])} · {l(profile.roles[1])}
+          <p aria-hidden="true" className="font-mono text-sm">
+            <span className="text-accent">mb@soc</span>
+            <span className="text-muted">:</span>
+            <span className="text-cyan">~</span>
+            <span className="text-muted">$ </span>
+            <span className="text-ink">whoami</span>
           </p>
           <h1
             id="accueil-titre"
-            className="mt-3 text-4xl font-semibold tracking-tight text-balance sm:text-5xl"
+            className="mt-3 font-mono text-4xl font-semibold tracking-tight text-balance sm:text-5xl"
           >
             {profile.name}
+            <span aria-hidden="true" className="cursor" />
           </h1>
           <p className="mt-4 max-w-xl text-lg leading-relaxed text-balance sm:text-xl">
+            <span aria-hidden="true" className="font-mono text-accent">
+              &gt;{' '}
+            </span>
             {l(profile.headline)}
           </p>
-          <ul className="mt-5 flex flex-wrap gap-2" aria-label="Domaines">
-            {['Réseau', 'Sécurité'].map((d) => (
+          <ul className="mt-5 flex flex-wrap gap-2" aria-label={t.hero.domainsLabel}>
+            {t.hero.domains.map((d) => (
               <li
                 key={d}
-                className="rounded border border-primary/40 px-2.5 py-1 font-mono text-xs font-medium tracking-wider text-primary uppercase"
+                className="rounded border border-cyan/40 bg-cyan/[0.06] px-2.5 py-1 font-mono text-xs font-medium tracking-wider text-cyan uppercase"
               >
                 {d}
               </li>
@@ -53,11 +60,28 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Fiche profil façon sortie d'équipement */}
+        {/* Fiche profil présentée comme une fenêtre de terminal */}
         <aside
-          aria-label="Résumé du profil"
-          className="order-3 overflow-hidden rounded-xl border border-line bg-surface/95 shadow-sm backdrop-blur lg:order-none"
+          aria-label={t.hero.profileLabel}
+          className="panel brackets order-3 overflow-hidden shadow-[0_0_60px_-20px_var(--c-glow)] lg:order-none"
         >
+          <div className="term-bar justify-between">
+            <span className="flex items-center gap-3">
+              <span aria-hidden="true" className="term-dots">
+                <span />
+                <span />
+                <span />
+              </span>
+              <span>
+                <span aria-hidden="true">cat </span>
+                {t.hero.profileTitle}
+              </span>
+            </span>
+            <span className="flex items-center gap-1.5">
+              <span aria-hidden="true" className="size-2 rounded-full bg-ok" />
+              {t.hero.available}
+            </span>
+          </div>
           <img
             src={profile.photo.src}
             width={profile.photo.width}
@@ -67,21 +91,16 @@ export default function Hero() {
             decoding="async"
             className="aspect-[5/4] w-full border-b border-line object-cover object-top"
           />
-          <div className="flex items-center justify-between border-b border-line px-4 py-2.5 font-mono text-xs text-muted">
-            <span>
-              <span aria-hidden="true">MB-01 › </span>
-              {t.hero.profileTitle}
-            </span>
-            <span className="flex items-center gap-1.5">
-              <span aria-hidden="true" className="size-2 rounded-full bg-ok" />
-              en recherche de poste
-            </span>
-          </div>
-          <dl className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-2 px-4 py-4 font-mono text-sm">
+          <dl className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-1.5 px-4 py-4 font-mono text-sm">
             {profile.profileSheet.map((row) => (
-              <div key={row.key} className="contents">
-                <dt className="text-muted">{row.key}</dt>
-                <dd>{l(row.value)}</dd>
+              <div key={l(row.key)} className="contents">
+                <dt className="text-cyan">
+                  {l(row.key)}
+                  <span aria-hidden="true" className="text-muted">
+                    :
+                  </span>
+                </dt>
+                <dd className="text-ink">{l(row.value)}</dd>
               </div>
             ))}
           </dl>
@@ -97,12 +116,14 @@ export default function Hero() {
               <li key={h.href}>
                 <a
                   href={h.href}
-                  className="flex h-full items-start gap-3 rounded-lg border border-line bg-surface/95 p-4 transition-colors hover:border-accent"
+                  className="panel panel-hover flex h-full items-start gap-3 bg-surface/95 p-4"
                 >
-                  <Icon size={20} aria-hidden="true" className="mt-0.5 shrink-0 text-accent" />
+                  <span className="grid size-9 shrink-0 place-items-center rounded-md border border-accent/30 bg-accent/10 text-accent">
+                    <Icon size={18} aria-hidden="true" />
+                  </span>
                   <span>
                     <span className="block text-sm leading-snug font-semibold">{l(h.title)}</span>
-                    <span className="mt-0.5 block text-sm text-muted">{l(h.sub)}</span>
+                    <span className="mt-0.5 block font-mono text-xs text-muted">{l(h.sub)}</span>
                   </span>
                 </a>
               </li>

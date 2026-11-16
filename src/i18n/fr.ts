@@ -1,6 +1,11 @@
 /** Libellés de l'interface (le contenu lui-même est dans src/data). */
 export const fr = {
   skipLink: 'Aller au contenu',
+  newTab: '(nouvel onglet)',
+  lang: {
+    label: 'Langue du site',
+    names: { fr: 'Français', en: 'English' },
+  },
   nav: {
     label: 'Navigation principale',
     home: 'Accueil',
@@ -17,14 +22,19 @@ export const fr = {
   hero: {
     ctaProjects: 'Voir les projets',
     ctaCv: 'Télécharger mon CV',
-    profileTitle: 'show profil',
+    profileTitle: 'profil.yml',
+    profileLabel: 'Résumé du profil',
     proofsLabel: 'Preuves clés',
+    available: 'en recherche de poste',
+    domainsLabel: 'Domaines',
+    domains: ['Réseau', 'Sécurité', 'SOC'],
   },
   award: {
     eyebrow: 'Distinction',
     round: 'Livrables de la manche',
     role: 'Mon rôle',
     photos: 'Photos de la remise du trophée',
+    team: 'Équipe',
   },
   projects: {
     eyebrow: 'Projets',
@@ -53,6 +63,9 @@ export const fr = {
     next: 'Projet suivant',
     diagramText: 'Description textuelle du schéma',
     diagramScroll: 'Faites défiler horizontalement pour voir tout le schéma.',
+    logicalLink: '(lien logique)',
+    others: 'Autres projets',
+    todoScreens: 'captures d’écran',
   },
   experience: {
     eyebrow: 'Expérience',
@@ -82,14 +95,18 @@ export const fr = {
     email: 'Écrire un e-mail',
     cvs: 'Mon CV',
   },
-  footer: { top: 'Retour en haut' },
+  footer: { top: 'Retour en haut', status: 'statut : en ligne' },
   notFound: {
+    code: 'Erreur 404',
     title: 'Page introuvable',
     text: 'Cette page n’existe pas ou a été déplacée.',
     home: 'Retour à l’accueil',
   },
   seo: {
     siteName: 'Meissa Babou — Portfolio',
+    jobTitle: 'Analyste SOC junior · Sécurité réseau',
+    award: '1re place',
+    ogLocale: 'fr_FR',
     homeTitle: 'Meissa Babou — Analyste SOC junior · Sécurité réseau',
     homeDescription:
       'Analyste SOC junior et sécurité réseau, lauréat du Cyber Competition Challenge 2026 (1re place). Projets : SOC open source sur AWS, réseau inter-LAN avec VPN et QoS, haute disponibilité LAN.',

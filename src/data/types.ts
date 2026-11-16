@@ -7,16 +7,19 @@ export interface Localized {
   en?: string
 }
 
+/** Texte affiché : identique dans les deux langues (string) ou traduit (Localized). */
+export type Txt = string | Localized
+
 /** Marque une information manquante : affichée en évidence sur le site. */
 export const todo = (what: string) => `[À COMPLÉTER : ${what}]`
 
 export type ProjectCategory = 'soc' | 'reseau' | 'securite' | 'infrastructure'
 
 export const categoryLabels: Record<ProjectCategory, Localized> = {
-  soc: { fr: 'SOC' },
+  soc: { fr: 'SOC', en: 'SOC' },
   reseau: { fr: 'Réseau', en: 'Network' },
   securite: { fr: 'Sécurité', en: 'Security' },
-  infrastructure: { fr: 'Infrastructure' },
+  infrastructure: { fr: 'Infrastructure', en: 'Infrastructure' },
 }
 
 /* ---------------------------- Schémas de topologie ---------------------------- */
@@ -41,9 +44,9 @@ export type NodeKind =
 
 export interface TopologyNode {
   id: string
-  label: string
+  label: Txt
   /** Seconde ligne en monospace (rôle, protocole…) */
-  sub?: string
+  sub?: Txt
   kind: NodeKind
   /** Centre du nœud dans le repère du schéma */
   x: number
@@ -55,14 +58,14 @@ export interface TopologyNode {
 export interface TopologyLink {
   from: string
   to: string
-  label?: string
+  label?: Txt
   dashed?: boolean
   /** Courbure du lien (en unités du schéma, positive ou négative) */
   bend?: number
 }
 
 export interface TopologyZone {
-  label: string
+  label: Txt
   x: number
   y: number
   w: number
@@ -127,12 +130,12 @@ export interface TimelineEntry {
   title: Localized
   org: Localized
   details?: Localized[]
-  tags?: string[]
+  tags?: Txt[]
 }
 
 export interface Certification {
-  name: string
-  issuer: string
+  name: Txt
+  issuer: Txt
   date: Localized
   verifyUrl: string | null
 }
@@ -146,7 +149,7 @@ export interface SkillGroup {
   id: string
   title: Localized
   icon: SkillIcon
-  items: string[]
+  items: Txt[]
   proofs: ProofRef[]
 }
 

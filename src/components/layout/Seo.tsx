@@ -1,11 +1,11 @@
 import { Head } from 'vite-react-ssg'
 import { absoluteUrl } from '../../config'
-import { useI18n } from '../../i18n'
+import { locales, translatePath, useI18n } from '../../i18n'
 
 interface SeoProps {
   title: string
   description: string
-  /** Chemin de la page, ex. "/" ou "/projets/soc-open-source" */
+  /** Chemin de la page, ex. "/", "/projets/soc-open-source" ou "/en/projects/…" */
   path: string
   /** Chemin de l'image Open Graph (PNG 1200×630 générée au build) */
   image?: string
@@ -33,9 +33,19 @@ export default function Seo({
       <title>{title}</title>
       <meta name="description" content={description} />
       <link rel="canonical" href={url} />
+      {locales.map((code) => (
+        <link
+          key={code}
+          rel="alternate"
+          hrefLang={code}
+          href={absoluteUrl(translatePath(path, code))}
+        />
+      ))}
+      <link rel="alternate" hrefLang="x-default" href={absoluteUrl(translatePath(path, 'fr'))} />
       <meta property="og:type" content={type} />
       <meta property="og:site_name" content={t.seo.siteName} />
-      <meta property="og:locale" content={locale === 'fr' ? 'fr_FR' : 'en_US'} />
+      <meta property="og:locale" content={t.seo.ogLocale} />
+      <meta property="og:locale:alternate" content={locale === 'fr' ? 'en_US' : 'fr_FR'} />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:url" content={url} />

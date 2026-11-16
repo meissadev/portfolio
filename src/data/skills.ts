@@ -4,7 +4,7 @@ import type { SkillGroup } from './types'
 export const skillGroups: SkillGroup[] = [
   {
     id: 'soc',
-    title: { fr: 'SOC et détection' },
+    title: { fr: 'SOC et détection', en: 'SOC and detection' },
     icon: 'radar',
     items: [
       'Wazuh',
@@ -19,31 +19,34 @@ export const skillGroups: SkillGroup[] = [
     ],
     proofs: [
       { project: 'soc-open-source' },
-      { section: 'distinction', label: { fr: 'Cyber Competition Challenge 2026' } },
-      { section: 'formation', label: { fr: 'Badge LetsDefend' } },
+      {
+        section: 'distinction',
+        label: { fr: 'Cyber Competition Challenge 2026', en: 'Cyber Competition Challenge 2026' },
+      },
+      { section: 'formation', label: { fr: 'Badge LetsDefend', en: 'LetsDefend badge' } },
     ],
   },
   {
     id: 'secu-reseau',
-    title: { fr: 'Sécurité réseau' },
+    title: { fr: 'Sécurité réseau', en: 'Network security' },
     icon: 'shield',
     items: [
       'FortiGate',
       'VPN IPsec',
       'NAT',
-      'ACL et route-maps',
-      'Durcissement SSH',
+      { fr: 'ACL et route-maps', en: 'ACLs and route-maps' },
+      { fr: 'Durcissement SSH', en: 'SSH hardening' },
       'Segmentation',
     ],
     proofs: [
       { project: 'qos-multisites' },
       { project: 'soc-open-source' },
-      { section: 'experience', label: { fr: 'Stage AIBD' } },
+      { section: 'experience', label: { fr: 'Stage AIBD', en: 'AIBD internship' } },
     ],
   },
   {
     id: 'routage',
-    title: { fr: 'Routage et commutation' },
+    title: { fr: 'Routage et commutation', en: 'Routing and switching' },
     icon: 'router',
     items: [
       'Cisco IOS',
@@ -63,19 +66,19 @@ export const skillGroups: SkillGroup[] = [
   },
   {
     id: 'systemes',
-    title: { fr: 'Systèmes et virtualisation' },
+    title: { fr: 'Systèmes et virtualisation', en: 'Systems and virtualization' },
     icon: 'server',
     items: ['Windows Server', 'Active Directory', 'Linux (Ubuntu)', 'Docker', 'VMware'],
     proofs: [{ project: 'soc-open-source' }, { project: 'qos-multisites' }],
   },
   {
     id: 'aws',
-    title: { fr: 'Cloud AWS' },
+    title: { fr: 'Cloud AWS', en: 'AWS Cloud' },
     icon: 'cloud',
     items: ['EC2', 'VPC', 'Security Groups', 'IAM', 'Systems Manager', 'AWS Budgets', 'Terraform'],
     proofs: [
       { project: 'soc-open-source' },
-      { section: 'formation', label: { fr: 'Certifications AWS' } },
+      { section: 'formation', label: { fr: 'Certifications AWS', en: 'AWS certifications' } },
     ],
   },
 ]

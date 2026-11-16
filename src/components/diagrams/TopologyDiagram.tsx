@@ -93,7 +93,7 @@ export default function TopologyDiagram({ topology }: { topology: Topology }) {
 
   return (
     <figure>
-      <div className="overflow-x-auto rounded-xl border border-line bg-surface">
+      <div className="panel overflow-x-auto">
         <svg
           role="img"
           // Pas de <title> SVG : React 19 le remonterait dans <head> (écart d'hydratation)
@@ -110,7 +110,7 @@ export default function TopologyDiagram({ topology }: { topology: Topology }) {
           <rect x={minX} y={minY} width={vbW} height={vbH} fill={`url(#${uid}-grid)`} />
 
           {topology.zones?.map((z) => (
-            <g key={z.label}>
+            <g key={l(z.label)}>
               <rect
                 x={z.x}
                 y={z.y}
@@ -131,7 +131,7 @@ export default function TopologyDiagram({ topology }: { topology: Topology }) {
                 fontSize="11"
                 letterSpacing="0.06em"
               >
-                {z.label.toUpperCase()}
+                {l(z.label).toUpperCase()}
               </text>
             </g>
           ))}
@@ -183,7 +183,7 @@ export default function TopologyDiagram({ topology }: { topology: Topology }) {
                   fontWeight="600"
                   fontFamily="var(--font-sans)"
                 >
-                  {n.label}
+                  {l(n.label)}
                 </text>
                 {n.sub && (
                   <text
@@ -193,7 +193,7 @@ export default function TopologyDiagram({ topology }: { topology: Topology }) {
                     fontSize="10.5"
                     fontFamily="var(--font-mono)"
                   >
-                    {n.sub}
+                    {l(n.sub)}
                   </text>
                 )}
               </g>
@@ -204,7 +204,8 @@ export default function TopologyDiagram({ topology }: { topology: Topology }) {
           {links
             .filter((k) => k.label)
             .map((k) => {
-              const w = k.label!.length * 6.6 + 14
+              const label = l(k.label!)
+              const w = label.length * 6.6 + 14
               return (
                 <g key={`lbl-${k.from}-${k.to}`} transform={`translate(${k.lx} ${k.ly})`}>
                   <rect
@@ -223,7 +224,7 @@ export default function TopologyDiagram({ topology }: { topology: Topology }) {
                     fontSize="11"
                     fontFamily="var(--font-mono)"
                   >
-                    {k.label}
+                    {label}
                   </text>
                 </g>
               )
@@ -241,9 +242,9 @@ export default function TopologyDiagram({ topology }: { topology: Topology }) {
         <ul className="mt-2 list-disc space-y-1 pl-5">
           {links.map((k) => (
             <li key={`txt-${k.from}-${k.to}`}>
-              {k.a.label} ↔ {k.b.label}
-              {k.label ? ` : ${k.label}` : ''}
-              {k.dashed ? ' (lien logique)' : ''}
+              {l(k.a.label)} ↔ {l(k.b.label)}
+              {k.label ? ` : ${l(k.label)}` : ''}
+              {k.dashed ? ` ${t.project.logicalLink}` : ''}
             </li>
           ))}
         </ul>

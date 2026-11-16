@@ -1,7 +1,14 @@
 # Portfolio — Meissa Babou
 
-Site statique de présentation : analyste SOC et ingénieur sécurité réseau.
-Page d'accueil à navigation ancrée et une étude de cas par projet (`/projets/<slug>`).
+Site statique de présentation : analyste SOC junior et sécurité réseau, en français et en anglais.
+Page d'accueil à navigation ancrée et une étude de cas par projet :
+
+| Langue   | Accueil | Étude de cas          |
+| -------- | ------- | --------------------- |
+| Français | `/`     | `/projets/<slug>`     |
+| Anglais  | `/en`   | `/en/projects/<slug>` |
+
+Le sélecteur **FR / EN** de l'en-tête ouvre la même page dans l'autre langue.
 
 **Stack** : Vite · React 19 · TypeScript · Tailwind CSS v4 · React Router · vite-react-ssg (pré-rendu) ·
 Framer Motion · lucide-react · polices IBM Plex auto-hébergées.
@@ -164,23 +171,28 @@ Pour vérifier l'aperçu LinkedIn après une mise à jour, utiliser le
 [Post Inspector de LinkedIn](https://www.linkedin.com/post-inspector/). Il force aussi LinkedIn à
 rafraîchir son cache.
 
-## Version anglaise (plus tard)
+## Version anglaise
 
-La structure est prête :
-
-1. Traduire les libellés de `src/i18n/en.ts`.
-2. Ajouter les champs `en` dans les données (`title: { fr: '…', en: '…' }`). Sans traduction, le
-   texte français s'affiche.
-3. Dans `src/routes.tsx`, dupliquer l'arbre de routes sous `/en` avec
-   `<LocaleProvider locale="en">`, et ajouter un sélecteur de langue dans l'en-tête.
+- Libellés de l'interface : `src/i18n/fr.ts` et `src/i18n/en.ts` (même structure, vérifiée par
+  TypeScript).
+- Contenu : chaque texte des données est `{ fr: '…', en: '…' }`. Un texte identique dans les deux
+  langues (nom d'outil, adresse IP) peut rester une simple chaîne. Sans `en`, le français s'affiche.
+- Liens internes : passer par `useI18n()` (`home`, `projectHref(slug)`, `sectionHref(id)`) pour
+  rester dans la langue courante.
+- Chaque page déclare son équivalent dans l'autre langue (`hreflang`), et le sitemap liste les deux
+  versions. Les images Open Graph anglaises sont dans `public/og/en/`.
+- Le CV et le rapport QoS n'existent qu'en français : leurs libellés anglais le précisent.
 
 ## Choix techniques
 
 - **Pré-rendu (vite-react-ssg)** : HTML complet pour chaque page au build, donc SEO et aperçus
   LinkedIn fiables, et site rapide sans serveur.
-- **Couleurs en variables CSS** (`src/styles/globals.css`) : bleu marine `#1D3A63` et bleu
-  `#2F5D9A` du CV. Le thème sombre change seulement les valeurs, avec des bleus éclaircis pour
-  garder un contraste AA.
+- **Identité « console SOC »** (`src/styles/globals.css`) : thème sombre par défaut (fond
+  `#070B0F`, vert terminal `#3DDC97`, cyan `#5CC8E6`), quadrillage discret, invites de shell en
+  en-tête de section, cartes en fenêtres de terminal. Le thème clair garde la même identité avec
+  un vert foncé `#08704D` (contraste AA). Le choix du visiteur est mémorisé.
+- **Version** : le numéro de `package.json` s'affiche dans le pied de page ; chaque mise en ligne
+  importante reçoit un tag Git du même numéro (`v2.0.0`…).
 - **Images Open Graph** : générées au build en PNG 1200×630 (satori + resvg), une par page.
 - **Animations** : Framer Motion en `LazyMotion`, coupées si « réduire les animations » est activé
   sur l'appareil.

@@ -12,16 +12,16 @@ import { profile } from '../data/profile'
 import { useI18n } from '../i18n'
 
 export default function Home() {
-  const { t } = useI18n()
+  const { t, locale, home } = useI18n()
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Person',
     name: profile.name,
-    jobTitle: 'Analyste SOC junior · Sécurité réseau',
-    url: SITE_URL,
+    jobTitle: t.seo.jobTitle,
+    url: `${SITE_URL}${home === '/' ? '' : home}`,
     email: `mailto:${profile.email}`,
     alumniOf: { '@type': 'CollegeOrUniversity', name: 'Université Iba Der Thiam de Thiès' },
-    award: `${award.competition} — 1re place`,
+    award: `${award.competition} — ${t.seo.award}`,
     sameAs: [profile.linkedin, profile.github].filter(Boolean),
   }
   return (
@@ -29,7 +29,8 @@ export default function Home() {
       <Seo
         title={t.seo.homeTitle}
         description={t.seo.homeDescription}
-        path="/"
+        path={home}
+        image={locale === 'fr' ? '/og/default.png' : '/og/en/default.png'}
         type="profile"
         jsonLd={jsonLd}
       />

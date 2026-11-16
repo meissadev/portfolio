@@ -10,11 +10,11 @@ export default function Experience() {
     <Section id="experience" eyebrow={t.experience.eyebrow} title={t.experience.title} tinted>
       <div className="grid gap-12 md:grid-cols-2">
         <Reveal>
-          <h3 className="label-mono mb-6 text-accent">{t.experience.work}</h3>
+          <h3 className="mb-6 font-mono text-sm text-accent">{t.experience.work}</h3>
           <Timeline entries={experience} />
         </Reveal>
         <Reveal delay={0.08}>
-          <h3 className="label-mono mb-6 text-accent">{t.experience.engagement}</h3>
+          <h3 className="mb-6 font-mono text-sm text-accent">{t.experience.engagement}</h3>
           <Timeline entries={engagement} />
         </Reveal>
       </div>

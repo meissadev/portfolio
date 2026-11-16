@@ -1,7 +1,7 @@
 import { LazyMotion, MotionConfig, domAnimation } from 'framer-motion'
 import { useEffect } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
-import { LocaleProvider, defaultLocale, useI18n } from '../../i18n'
+import { LocaleProvider, useI18n, type Locale } from '../../i18n'
 import Footer from './Footer'
 import Header from './Header'
 
@@ -22,16 +22,16 @@ function SkipLink() {
   return (
     <a
       href="#contenu"
-      className="sr-only z-50 rounded-md bg-primary px-4 py-2 font-medium text-on-primary focus:not-sr-only focus:fixed focus:top-3 focus:left-3"
+      className="sr-only z-50 rounded-md bg-primary px-4 py-2 font-mono text-sm font-medium text-on-primary focus:not-sr-only focus:fixed focus:top-3 focus:left-3"
     >
       {t.skipLink}
     </a>
   )
 }
 
-export default function Layout() {
+export default function Layout({ locale }: { locale: Locale }) {
   return (
-    <LocaleProvider locale={defaultLocale}>
+    <LocaleProvider locale={locale}>
       {/* reducedMotion="user" : animations coupées si « réduire les animations » est activé */}
       <MotionConfig reducedMotion="user">
         <LazyMotion features={domAnimation} strict>

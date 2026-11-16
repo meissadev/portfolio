@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { profile } from '../../data/profile'
 import { useI18n } from '../../i18n'
+import LanguageSwitch from './LanguageSwitch'
 import ThemeToggle from './ThemeToggle'
 
 const SECTIONS = [
@@ -16,11 +17,11 @@ const SECTIONS = [
 ] as const
 
 export default function Header() {
-  const { t } = useI18n()
+  const { t, home, sectionHref } = useI18n()
   const { pathname } = useLocation()
   const [open, setOpen] = useState(false)
   const [active, setActive] = useState<string>('accueil')
-  const onHome = pathname === '/'
+  const onHome = (pathname.replace(/\/+$/, '') || '/') === home
 
   const labels: Record<(typeof SECTIONS)[number], string> = {
     accueil: t.nav.home,
@@ -56,14 +57,14 @@ export default function Header() {
   }, [open])
 
   const linkClass = (id: string) =>
-    `rounded-md px-3 py-2 text-sm font-medium transition-colors hover:text-accent ${
+    `rounded-md px-2.5 py-2 font-mono text-[0.8rem] transition-colors hover:text-accent ${
       onHome && active === id ? 'text-accent' : 'text-muted'
     }`
 
   const links = SECTIONS.map((id) => (
     <li key={id}>
       <a
-        href={`/#${id}`}
+        href={sectionHref(id)}
         className={linkClass(id)}
         aria-current={onHome && active === id ? 'location' : undefined}
         onClick={() => setOpen(false)}
@@ -74,23 +75,22 @@ export default function Header() {
   ))
 
   return (
-    <header id="haut" className="sticky top-0 z-40 border-b border-line bg-bg/90 backdrop-blur-md">
+    <header id="haut" className="sticky top-0 z-40 border-b border-line bg-bg/85 backdrop-blur-md">
       <div className="container-page flex h-16 items-center justify-between gap-4">
-        <Link to="/" className="flex items-center gap-2.5 font-semibold">
-          <span
-            aria-hidden="true"
-            className="grid size-8 place-items-center rounded-md bg-primary font-mono text-xs text-on-primary"
-          >
-            {profile.initials}
+        <Link to={home} className="flex items-center gap-2 font-mono text-sm font-semibold">
+          <span aria-hidden="true" className="text-accent">
+            &gt;_
           </span>
           <span>{profile.name}</span>
+          <span aria-hidden="true" className="cursor !h-[1em] !w-[0.45em]" />
         </Link>
 
         <nav aria-label={t.nav.label} className="hidden lg:block">
           <ul className="flex items-center gap-0.5">{links}</ul>
         </nav>
 
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-1.5">
+          <LanguageSwitch />
           <ThemeToggle />
           <button
             type="button"

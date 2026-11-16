@@ -7,8 +7,23 @@ import ProjectPage from './pages/ProjectPage'
 
 export const routes: RouteRecord[] = [
   {
+    // Version anglaise : /en et /en/projects/<slug>
+    path: '/en',
+    element: <Layout locale="en" />,
+    children: [
+      { index: true, element: <Home /> },
+      {
+        path: 'projects/:slug',
+        element: <ProjectPage />,
+        getStaticPaths: () => projects.map((p) => `projects/${p.slug}`),
+      },
+      { path: '*', element: <NotFound /> },
+    ],
+  },
+  {
+    // Version française (par défaut) : / et /projets/<slug>
     path: '/',
-    element: <Layout />,
+    element: <Layout locale="fr" />,
     children: [
       { index: true, element: <Home /> },
       {

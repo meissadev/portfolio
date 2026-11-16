@@ -16,7 +16,12 @@ function Block({ title, children }: { title: string; children: ReactNode }) {
   return (
     <Reveal>
       <section className="border-t border-line py-8">
-        <h2 className="label-mono mb-4 text-accent">{title}</h2>
+        <h2 className="mb-4 font-mono text-sm font-medium text-accent">
+          <span aria-hidden="true" className="text-muted">
+            #{' '}
+          </span>
+          {title}
+        </h2>
         {children}
       </section>
     </Reveal>
@@ -25,7 +30,7 @@ function Block({ title, children }: { title: string; children: ReactNode }) {
 
 export default function ProjectPage() {
   const { slug } = useParams()
-  const { t, l } = useI18n()
+  const { t, l, locale, projectHref, sectionHref } = useI18n()
   const index = projects.findIndex((p) => p.slug === slug)
   if (index === -1) return <NotFound />
 
@@ -39,22 +44,24 @@ export default function ProjectPage() {
       <Seo
         title={`${l(project.title)} — Meissa Babou`}
         description={l(project.summary)}
-        path={`/projets/${project.slug}`}
-        image={`/og/${project.slug}.png`}
+        path={projectHref(project.slug)}
+        image={`/og/${locale === 'fr' ? '' : 'en/'}${project.slug}.png`}
         type="article"
       />
 
-      <header className="border-b border-line bg-surface-2/60">
+      <header className="border-b border-line bg-surface-2/70">
         <div className="container-page py-10 sm:py-14">
           <a
-            href="/#projets"
+            href={sectionHref('projets')}
             className="inline-flex items-center gap-1.5 text-sm text-muted hover:text-accent"
           >
             <ArrowLeft size={16} aria-hidden="true" />
             {t.project.back}
           </a>
           <p className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-xs text-muted">
-            <span className="font-medium text-accent">{project.code}</span>
+            <span className="rounded border border-accent/40 px-1.5 py-0.5 font-medium text-accent">
+              {project.code}
+            </span>
             <span>{project.categories.map((c) => l(categoryLabels[c])).join(' / ')}</span>
             <span className="flex items-center gap-1.5">
               <span
@@ -64,7 +71,7 @@ export default function ProjectPage() {
               {ongoing ? t.projects.status.ongoing : t.projects.status.done}
             </span>
           </p>
-          <h1 className="mt-3 max-w-3xl text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
+          <h1 className="mt-3 max-w-3xl font-mono text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
             {l(project.title)}
           </h1>
           <p className="mt-4 max-w-3xl text-lg text-muted">{l(project.summary)}</p>
@@ -81,14 +88,18 @@ export default function ProjectPage() {
       <div className="container-page pb-16">
         <Reveal>
           <div className="grid gap-5 py-10 md:grid-cols-2">
-            <div className="rounded-xl border border-line bg-surface p-5">
-              <h2 className="label-mono mb-2 text-accent">{t.project.context}</h2>
+            <div className="panel p-5">
+              <h2 className="mb-2 font-mono text-sm font-medium text-accent">
+                {t.project.context}
+              </h2>
               <p>
                 <Text>{l(project.context)}</Text>
               </p>
             </div>
-            <div className="rounded-xl border border-line bg-surface p-5">
-              <h2 className="label-mono mb-2 text-accent">{t.project.objective}</h2>
+            <div className="panel p-5">
+              <h2 className="mb-2 font-mono text-sm font-medium text-accent">
+                {t.project.objective}
+              </h2>
               <p>
                 <Text>{l(project.objective)}</Text>
               </p>
@@ -129,7 +140,7 @@ export default function ProjectPage() {
               {project.screenshots.map((s) => (
                 <figure
                   key={s.src}
-                  className={`overflow-hidden rounded-xl border border-line bg-surface ${s.wide ? 'sm:col-span-2' : ''}`}
+                  className={`panel overflow-hidden ${s.wide ? 'sm:col-span-2' : ''}`}
                 >
                   <img
                     src={s.src}
@@ -139,14 +150,16 @@ export default function ProjectPage() {
                     className="w-full"
                   />
                   {s.caption && (
-                    <figcaption className="px-4 py-3 text-sm text-muted">{l(s.caption)}</figcaption>
+                    <figcaption className="border-t border-line px-4 py-3 font-mono text-xs text-muted">
+                      {l(s.caption)}
+                    </figcaption>
                   )}
                 </figure>
               ))}
             </div>
           ) : (
             <PlaceholderBlock>
-              [À COMPLÉTER : captures d’écran — {l(project.screenshotsHint)}]
+              [À COMPLÉTER : {t.project.todoScreens} — {l(project.screenshotsHint)}]
             </PlaceholderBlock>
           )}
         </Block>
@@ -162,7 +175,7 @@ export default function ProjectPage() {
               >
                 {t.project.github}
                 <ExternalLink size={15} aria-hidden="true" />
-                <span className="sr-only">(nouvel onglet)</span>
+                <span className="sr-only">{t.newTab}</span>
               </a>
             )}
             {project.resources?.map((r) => (
@@ -178,23 +191,17 @@ export default function ProjectPage() {
         </Block>
 
         <nav
-          aria-label="Autres projets"
+          aria-label={t.project.others}
           className="mt-4 grid gap-4 border-t border-line pt-8 sm:grid-cols-2"
         >
-          <Link
-            to={`/projets/${prev.slug}`}
-            className="rounded-xl border border-line bg-surface p-4 transition-colors hover:border-accent"
-          >
+          <Link to={projectHref(prev.slug)} className="panel panel-hover p-4">
             <span className="label-mono flex items-center gap-1.5 text-muted">
               <ArrowLeft size={14} aria-hidden="true" />
               {t.project.prev}
             </span>
             <span className="mt-1 block font-medium">{l(prev.title)}</span>
           </Link>
-          <Link
-            to={`/projets/${next.slug}`}
-            className="rounded-xl border border-line bg-surface p-4 text-right transition-colors hover:border-accent"
-          >
+          <Link to={projectHref(next.slug)} className="panel panel-hover p-4 text-right">
             <span className="label-mono flex items-center justify-end gap-1.5 text-muted">
               {t.project.next}
               <ArrowRight size={14} aria-hidden="true" />

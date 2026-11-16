@@ -6,7 +6,12 @@ import { SITE_URL } from './site-url'
 
 const dist = 'dist'
 const today = new Date().toISOString().slice(0, 10)
-const paths = ['/', ...projects.map((p) => `/projets/${p.slug}`)]
+const paths = [
+  '/',
+  ...projects.map((p) => `/projets/${p.slug}`),
+  '/en',
+  ...projects.map((p) => `/en/projects/${p.slug}`),
+]
 
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
